@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Keep supporting labels readable on real screens. The original design used
+   6–10px utility text in many places, which is difficult for customers to
+   scan on laptops and especially on mobile. */
+@layer utilities {
+  .text-\[6px\], .text-\[7px\], .text-\[8px\], .text-\[9px\] { font-size: 0.6875rem !important; line-height: 1.25rem; }
+  .text-\[10px\], .text-\[11px\] { font-size: 0.75rem !important; line-height: 1.25rem; }
+}
+
+@layer base {
+  :root {
+    --bg: 40 30% 94%; /* #f2f0ea */
+    --ink: 60 6% 7%; /* #11110f */
+    --soft: 45 14% 83%; /* #dbd7cc */
+    --paper: 45 25% 96%; /* #f8f6f0 */
+    --accent: 82 100% 61%; /* #b6ff39 */
+    --accent2: 8 100% 64%; /* #ff5e48 */
+    --muted: 40 4% 47%; /* #79776f */
+    --line: 60 6% 6% / 0.14;
+    --radius: 24px;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(145deg, rgba(242, 240, 234, 0.96), rgba(248, 246, 240, 0.9));
+  color: #11110f;
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes ambient-drift-lime {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-5vw, 7vh, 0) scale(1.08); }
+}
+
+@keyframes ambient-drift-coral {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(7vw, -5vh, 0) scale(1.1); }
+}
+
+.ambient-glow {
+  filter: blur(34px);
+  will-change: transform;
+}
+
+.ambient-glow-lime {
+  background: radial-gradient(circle, rgba(182, 255, 57, 0.19), rgba(182, 255, 57, 0) 68%);
+  animation: ambient-drift-lime 18s ease-in-out infinite;
+}
+
+.ambient-glow-coral {
+  background: radial-gradient(circle, rgba(255, 94, 72, 0.13), rgba(255, 94, 72, 0) 69%);
+  animation: ambient-drift-coral 22s ease-in-out infinite;
+}
+
+.ambient-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-glow { animation: none; }
+}
+
+/* Custom scrollbar - warm tone */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f2f0ea;
+}
+::-webkit-scrollbar-thumb {
+  background: #79776f;
+  border-radius: 4px;
+}
+
+/* Utility classes matching the concept */
+.glass-light {
+  background: rgba(242, 240, 234, 0.87);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(17, 17, 15, 0.14);
+}
+
+.glass-card-light {
+  background: #f8f6f0;
+  border: 1px solid rgba(17, 17, 15, 0.08);
+  box-shadow: 0 24px 70px rgba(17, 17, 15, 0.14);
+}
+
+.shadow-soft {
+  box-shadow: 0 24px 70px rgba(17, 17, 15, 0.14);
+}
+
+/* Gradient text for brand */
+.gradient-text-brand {
+  background: linear-gradient(135deg, #11110f, #b6ff39);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Selection color */
+::selection {
+  background: #11110f;
+  color: white;
+}
+
+@media print {
+  nav, footer, body > header, .print-hide { display: none !important; }
+  body { background: #fff !important; color: #111 !important; }
+  main { padding-top: 0 !important; }
+  .invoice-card { border: 0 !important; box-shadow: none !important; border-radius: 0 !important; }
+  .invoice-card::before { content: "THREAD N TRENDS  /  ORDER INVOICE"; display: block; padding-bottom: 24px; border-bottom: 2px solid #111; margin-bottom: 28px; font-size: 18px; font-weight: 800; letter-spacing: 0.18em; }
+  main a, main button { display: none !important; }
+}

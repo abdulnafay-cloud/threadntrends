@@ -1,0 +1,6 @@
+import { NextResponse } from 'next/server';
+import { requireAdmin } from '@/lib/admin-auth';
+import { database, ensureAuthSchema } from '@/lib/db';
+export async function GET() { try { await requireAdmin(); await ensureAuthSchema(); const r = await database.query(`SELECT * FROM tnt_discounts ORDER BY created_at DESC`); return NextResponse.json(r.rows); } catch { return NextResponse.json({ error: 'Unauthorized' }, { status: 401 }); } }
+export async function POST(request: Request) { try { await requireAdmin(); await ensureAuthSchema(); const d = await request.json(); const r = await database.query(`INSERT INTO tnt_discounts (code, percent, valid_until, usage_limit) VALUES ($1,$2,$3,$4) RETURNING *`, [String(d.code).toUpperCase(), Number(d.percent), d.validUntil || null, d.usageLimit || null]); return NextResponse.json(r.rows[0], { status: 201 }); } catch { return NextResponse.json({ error: 'Unable to create discount' }, { status: 400 }); } }
+export async function PATCH(request: Request) { try { await requireAdmin(); await ensureAuthSchema(); const { id, isActive } = await request.json(); await database.query(`UPDATE tnt_discounts SET is_active = $1 WHERE id = $2`, [Boolean(isActive), id]); return NextResponse.json({ success: true }); } catch { return NextResponse.json({ error: 'Unable to update discount' }, { status: 400 }); } }

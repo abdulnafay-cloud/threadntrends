@@ -1,0 +1,4 @@
+import { requireAdmin } from '@/lib/admin-auth';
+import { database, ensureAuthSchema } from '@/lib/db';
+export default async function CustomersPage() { await requireAdmin(); await ensureAuthSchema(); const { rows } = await database.query(`SELECT id,name,email,role,created_at FROM tnt_users ORDER BY created_at DESC`); return <section><h1 className="text-2xl font-semibold mb-6">Customers</h1><div className="bg-white rounded-lg shadow overflow-x-auto"><table className="w-full text-sm"><thead><tr className="border-b"><th className="p-3 text-left">Name</th><th className="p-3 text-left">Email</th><th className="p-3 text-left">Role</th><th className="p-3 text-left">Joined</th></tr></thead><tbody>{rows.map((c) => <tr key={c.id} className="border-b"><td className="p-3">{c.name}</td><td className="p-3">{c.email}</td><td className="p-3 capitalize">{c.role}</td><td className="p-3">{new Date(c.created_at).toLocaleDateString()}</td></tr>)}</tbody></table></div></section>; }
+

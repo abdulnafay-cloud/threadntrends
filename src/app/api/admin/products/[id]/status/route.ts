@@ -1,0 +1,2 @@
+import { requireAdmin } from '@/lib/admin-auth'; import { database, ensureAuthSchema } from '@/lib/db';
+export async function PATCH(request:Request,{params}:{params:Promise<{id:string}>}){try{await requireAdmin();await ensureAuthSchema();const {id}=await params;const {isActive}=await request.json();await database.query(`UPDATE tnt_products SET is_active=$1, updated_at=NOW() WHERE id=$2`,[Boolean(isActive),Number(id)]);return Response.json({success:true});}catch{return Response.json({error:'Unauthorized'},{status:401});}}
