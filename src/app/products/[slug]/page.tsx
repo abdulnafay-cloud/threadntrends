@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { products } from "@/lib/products";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cartStore";
 import { useWishlist } from "@/lib/wishlistStore";
 import Toast from "@/components/Toast";
@@ -20,7 +20,9 @@ function getProduct(slug: string) {
 
 export default function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {
   const unwrappedParams = React.use(params);
-  const product = getProduct(unwrappedParams.slug);
+  const [remoteProduct, setRemoteProduct] = useState<import('@/lib/product-types').Product | null>(null);
+  const product = remoteProduct || getProduct(unwrappedParams.slug);
+  useEffect(() => { fetch(`/api/products/${unwrappedParams.slug}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(data => data && setRemoteProduct(data)).catch(() => undefined); }, [unwrappedParams.slug]);
   const { addItem } = useCart();
   const { toggleItem, isInWishlist } = useWishlist();
   const hydrated = useHydrated();
@@ -31,8 +33,9 @@ export default function ProductDetail({ params }: { params: Promise<{ slug: stri
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [mainImage, setMainImage] = useState(product?.image || "");
+  useEffect(() => { if (remoteProduct) { setSelectedSize(remoteProduct.sizes[0] || ''); setSelectedColor(remoteProduct.colors[0] || ''); setMainImage(remoteProduct.image); } }, [remoteProduct]);
 
-  if (!product) return notFound();
+  if (!product) return <div className="mx-auto max-w-3xl px-4 py-24 text-center">Loading product…</div>;
 
   const isOutOfStock = product.stock <= 0;
   const maxQuantity = Math.min(10, product.stock);

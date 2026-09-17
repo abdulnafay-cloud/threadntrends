@@ -1,7 +1,7 @@
 import { randomBytes, randomUUID } from "crypto";
 import { getCurrentUser, normalizeEmail } from "@/lib/auth";
 import { database, ensureAuthSchema } from "@/lib/db";
-import { products } from "@/lib/products";
+import { getProductById } from "@/lib/db-products";
 
 export const runtime = "nodejs";
 
@@ -24,16 +24,16 @@ export async function POST(request: Request) {
       return Response.json({ error: "Complete all required checkout details." }, { status: 400 });
     }
 
-    const items = requestedItems.map((requested) => {
-      const product = products.find((entry) => entry.id === Number(requested.id));
+    await ensureAuthSchema();
+    const items = await Promise.all(requestedItems.map(async (requested) => {
+      const product = await getProductById(Number(requested.id));
       const quantity = Math.floor(Number(requested.quantity));
       const size = String(requested.size ?? "");
       const color = String(requested.color ?? "");
       if (!product || quantity < 1 || quantity > product.stock || !product.sizes.includes(size) || !product.colors.includes(color)) throw new Error("INVALID_ITEM");
       return { product, quantity, size, color };
-    });
+    }));
     const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-    await ensureAuthSchema();
     const existingOrder = await database.query("SELECT 1 FROM tnt_orders WHERE email = $1 LIMIT 1", [email]);
     if (code && code !== "WELCOME10") return Response.json({ error: "That discount code is not valid." }, { status: 400 });
     if (code === "WELCOME10" && existingOrder.rowCount) return Response.json({ error: "WELCOME10 is only for a first order." }, { status: 400 });
