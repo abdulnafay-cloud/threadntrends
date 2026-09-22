@@ -1,63 +1,24 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function StorySection() {
-  return (
-    <section className="bg-[#111] text-white overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-2 min-h-[680px]">
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="relative min-h-[520px] md:min-h-full overflow-hidden"
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1400&q=85"
-            alt="Fashion editorial"
-            fill
-            className="object-cover saturate-[0.55] scale-[1.08] transition-transform duration-[1600ms] hover:scale-[1.02]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#111]" />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="p-[9vw] flex flex-col justify-center"
-        >
-          <div className="text-[10px] uppercase tracking-[0.18em] font-extrabold text-[#777] mb-2.5">
-            Brand journal / 01
-          </div>
-          <h2 className="font-manrope font-bold text-[clamp(48px,6vw,88px)] leading-[0.95] tracking-[-0.055em] max-w-[620px]">
-            Built for the <em className="font-playfair not-italic text-[#b6ff39]">in-between.</em>
-          </h2>
-          <p className="text-[#aaa] leading-relaxed max-w-[520px] mt-4">
-            Between traditional and modern. Relaxed and refined. Work and midnight plans. Thread n Trends is a wardrobe system for people whose style changes with the day—not with the algorithm.
-          </p>
-          <div className="grid grid-cols-3 gap-6 border-t border-[#333] mt-11 pt-9">
-            <div>
-              <strong className="font-manrope font-extrabold text-3xl block">07</strong>
-              <small className="text-[#888] text-[10px] uppercase tracking-[0.13em]">Core fabrics</small>
-            </div>
-            <div>
-              <strong className="font-manrope font-extrabold text-3xl block">365</strong>
-              <small className="text-[#888] text-[10px] uppercase tracking-[0.13em]">Wear days</small>
-            </div>
-            <div>
-              <strong className="font-manrope font-extrabold text-3xl block">01</strong>
-              <small className="text-[#888] text-[10px] uppercase tracking-[0.13em]">Your identity</small>
-            </div>
-          </div>
-          <button className="mt-6 bg-[#b6ff39] text-[#111] px-6 py-4 rounded-full font-extrabold text-[11px] tracking-[0.09em] uppercase flex items-center gap-2.5 hover:translate-y-[-3px] hover:shadow-[0_12px_30px_rgba(182,255,57,0.2)] transition w-fit">
-            Our story ↗
-          </button>
-        </motion.div>
+  return <section className="overflow-hidden bg-[#a56a4b] text-[#292421]">
+    <div className="marquee border-y border-[#292421]/20 py-3 font-manrope text-[10px] font-bold uppercase tracking-[0.2em]">Thread n Trends <span>·</span> Independent wardrobe <span>·</span> Made for the in-between <span>·</span> Thread n Trends <span>·</span> Independent wardrobe <span>·</span> Made for the in-between</div>
+    <div className="mx-auto grid max-w-[1600px] grid-cols-1 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="relative min-h-[440px] lg:min-h-[650px]">
+        <Image src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1400&q=85" alt="Fashion editorial" fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover saturate-[0.56] contrast-[1.04]" />
+        <div className="absolute inset-0 bg-[#292421]/18" />
+        <div className="absolute bottom-6 left-6 max-w-48 border border-white/30 bg-[#f3efeb]/90 p-4 sm:bottom-8 sm:left-8"><p className="text-[8px] font-bold uppercase tracking-[0.17em] text-[#6f6964]">Studio note / 01</p><p className="mt-2 font-playfair text-xl italic leading-5">Wear more of what feels like you.</p></div>
       </div>
-    </section>
-  );
+      <motion.div initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.8 }} className="flex flex-col justify-between px-6 py-16 sm:px-12 lg:px-20 lg:py-20">
+        <div><p className="eyebrow text-[#292421]/60">Why we exist</p><h2 className="mt-5 max-w-3xl font-playfair text-[clamp(53px,6.3vw,100px)] leading-[0.8] tracking-[-0.075em]">Not louder.<br /><i>More you.</i></h2></div>
+        <div className="mt-14 max-w-xl"><p className="text-base leading-8 text-[#292421]/75">Thread n Trends makes room for the pieces that keep up—through slow mornings, long days, and whatever happens next. A wardrobe isn&apos;t a costume. It&apos;s an extension of you.</p><Link href="/about" className="mt-8 inline-flex items-center gap-2 border-b border-[#292421] pb-2 text-[10px] font-bold uppercase tracking-[0.15em] transition hover:text-[#f3efeb] hover:border-[#f3efeb]">Read our story <ArrowUpRight size={15} /></Link></div>
+        <div className="mt-14 grid grid-cols-3 border-t border-[#292421]/25 pt-6 text-center"><div><b className="block font-playfair text-4xl italic">07</b><span className="mt-1 block text-[8px] font-bold uppercase tracking-[0.13em]">Core fabrics</span></div><div className="border-x border-[#292421]/25"><b className="block font-playfair text-4xl italic">365</b><span className="mt-1 block text-[8px] font-bold uppercase tracking-[0.13em]">Wear days</span></div><div><b className="block font-playfair text-4xl italic">01</b><span className="mt-1 block text-[8px] font-bold uppercase tracking-[0.13em]">Your identity</span></div></div>
+      </motion.div>
+    </div>
+  </section>;
 }

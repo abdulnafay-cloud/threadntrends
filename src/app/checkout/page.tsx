@@ -10,7 +10,7 @@ import { useHydrated } from "@/lib/useHydrated";
 const formatPrice = (price: number) => `PKR ${price.toLocaleString()}`;
 
 const fieldClass =
-  "mt-2 h-12 w-full rounded-xl border border-[#11110f]/12 bg-white px-4 text-sm outline-none transition placeholder:text-[#aaa] focus:border-[#11110f] focus:ring-2 focus:ring-[#b6ff39]/50";
+  "mt-2 h-12 w-full rounded-xl border border-[#292421]/12 bg-white px-4 text-sm outline-none transition placeholder:text-[#a49b94] focus:border-[#292421] focus:ring-2 focus:ring-[#a56a4b]/50";
 
 export default function CheckoutPage() {
   const { items, clearCart, discountCode, discountPercent } = useCart();
@@ -36,28 +36,28 @@ export default function CheckoutPage() {
     } catch { setError("Could not reach the server. Please try again."); } finally { setSubmitting(false); }
   }
 
-  if (!hydrated) return <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6"><div className="h-[600px] animate-pulse rounded-[32px] bg-[#e4e0d8]/70" /></section>;
+  if (!hydrated) return <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6"><div className="h-[600px] animate-pulse rounded-[32px] bg-[#d8d0c8]/70" /></section>;
 
   if (orderReference) {
     return (
       <section className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 sm:py-24">
-        <div className="rounded-[32px] border border-[#11110f]/10 bg-[#f8f6f0] px-6 py-14 shadow-[0_24px_70px_rgba(17,17,15,0.08)] sm:px-14">
-          <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#b6ff39]">
+        <div className="rounded-[32px] border border-[#292421]/10 bg-[#f3efeb] px-6 py-14 shadow-[0_24px_70px_rgba(17,17,15,0.08)] sm:px-14">
+          <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#a56a4b]">
             <PackageCheck className="h-9 w-9" />
           </span>
-          <p className="mt-8 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#79776f]">Order confirmed</p>
+          <p className="mt-8 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#6f6964]">Order confirmed</p>
           <h1 className="mt-2 font-manrope text-5xl font-bold leading-[0.92] tracking-[-0.055em] sm:text-6xl">
-            Your order is <em className="font-playfair font-semibold text-[#ff5e48]">in motion.</em>
+            Your order is <em className="font-playfair font-semibold text-[#7f5539]">in motion.</em>
           </h1>
-          <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-[#79776f]">
+          <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-[#6f6964]">
             Thank you for shopping Thread n Trends. Your Cash on Delivery order reference is{" "}
-            <strong className="text-[#11110f]">{orderReference}</strong>. We will contact you before dispatch.
+            <strong className="text-[#292421]">{orderReference}</strong>. We will contact you before dispatch.
           </p>
           <p className="mt-3 font-manrope text-2xl font-bold">{formatPrice(orderTotal)}</p>
           <Link href="/track" className="mt-5 inline-block text-xs font-bold uppercase tracking-[0.08em] underline underline-offset-4">Track this order</Link>
           <Link
             href="/products"
-            className="mx-auto mt-8 flex w-fit items-center gap-2 rounded-full bg-[#11110f] px-7 py-4 text-[11px] font-extrabold uppercase tracking-[0.08em] text-white transition hover:bg-[#2a2a2a]"
+            className="mx-auto mt-8 flex w-fit items-center gap-2 rounded-full bg-[#292421] px-7 py-4 text-[11px] font-extrabold uppercase tracking-[0.08em] text-white transition hover:bg-[#342e2b]"
           >
             Continue shopping
           </Link>
@@ -69,10 +69,10 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-        <div className="rounded-[30px] border border-[#11110f]/10 bg-[#f8f6f0] p-10">
+        <div className="rounded-[30px] border border-[#292421]/10 bg-[#f3efeb] p-10">
           <h1 className="font-manrope text-4xl font-bold tracking-[-0.04em]">Your bag is empty.</h1>
-          <p className="mt-3 text-sm text-[#79776f]">Add something you love before heading to checkout.</p>
-          <Link href="/products" className="mt-7 inline-flex rounded-full bg-[#11110f] px-7 py-4 text-xs font-bold uppercase tracking-[0.08em] text-white">
+          <p className="mt-3 text-sm text-[#6f6964]">Add something you love before heading to checkout.</p>
+          <Link href="/products" className="mt-7 inline-flex rounded-full bg-[#292421] px-7 py-4 text-xs font-bold uppercase tracking-[0.08em] text-white">
             Shop the collection
           </Link>
         </div>
@@ -87,21 +87,21 @@ export default function CheckoutPage() {
       </Link>
 
       <div className="mb-10">
-        <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#79776f]">Secure checkout</p>
+        <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#6f6964]">Secure checkout</p>
         <h1 className="mt-2 font-manrope text-5xl font-bold leading-none tracking-[-0.055em] sm:text-7xl">
-          Almost <em className="font-playfair font-semibold text-[#ff5e48]">yours.</em>
+          Almost <em className="font-playfair font-semibold text-[#7f5539]">yours.</em>
         </h1>
       </div>
 
       <form onSubmit={placeOrder} className="grid items-start gap-8 lg:grid-cols-[1fr_390px]">
         <div className="space-y-6">
-          <div className="rounded-[28px] border border-[#11110f]/10 bg-[#f8f6f0] p-6 sm:p-8">
+          <div className="rounded-[28px] border border-[#292421]/10 bg-[#f3efeb] p-6 sm:p-8">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#79776f]">Step 01</p>
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#6f6964]">Step 01</p>
                 <h2 className="mt-1 font-manrope text-2xl font-bold tracking-[-0.035em]">Contact details</h2>
               </div>
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#b6ff39] text-sm font-bold">1</span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#a56a4b] text-sm font-bold">1</span>
             </div>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <label className="text-xs font-bold">Full name<input className={fieldClass} name="name" autoComplete="name" placeholder="Your full name" required /></label>
@@ -110,25 +110,25 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-[#11110f]/10 bg-[#f8f6f0] p-6 sm:p-8">
+          <div className="rounded-[28px] border border-[#292421]/10 bg-[#f3efeb] p-6 sm:p-8">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#79776f]">Step 02</p>
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#6f6964]">Step 02</p>
                 <h2 className="mt-1 font-manrope text-2xl font-bold tracking-[-0.035em]">Delivery address</h2>
               </div>
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#b6ff39] text-sm font-bold">2</span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#a56a4b] text-sm font-bold">2</span>
             </div>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <label className="text-xs font-bold sm:col-span-2">Street address<input className={fieldClass} name="address" autoComplete="street-address" placeholder="House, street and area" required /></label>
               <label className="text-xs font-bold">City<input className={fieldClass} name="city" autoComplete="address-level2" placeholder="City" required /></label>
               <label className="text-xs font-bold">Postal code<input className={fieldClass} name="postalCode" autoComplete="postal-code" placeholder="Postal code" required /></label>
-              <label className="text-xs font-bold sm:col-span-2">Delivery notes <span className="font-normal text-[#79776f]">(optional)</span><textarea className="mt-2 min-h-24 w-full resize-none rounded-xl border border-[#11110f]/12 bg-white p-4 text-sm outline-none transition placeholder:text-[#aaa] focus:border-[#11110f] focus:ring-2 focus:ring-[#b6ff39]/50" name="notes" placeholder="Landmark or delivery instructions" /></label>
+              <label className="text-xs font-bold sm:col-span-2">Delivery notes <span className="font-normal text-[#6f6964]">(optional)</span><textarea className="mt-2 min-h-24 w-full resize-none rounded-xl border border-[#292421]/12 bg-white p-4 text-sm outline-none transition placeholder:text-[#a49b94] focus:border-[#292421] focus:ring-2 focus:ring-[#a56a4b]/50" name="notes" placeholder="Landmark or delivery instructions" /></label>
             </div>
           </div>
 
-          <div className="rounded-[28px] border-2 border-[#11110f] bg-[#b6ff39] p-6 sm:p-8">
+          <div className="rounded-[28px] border-2 border-[#292421] bg-[#a56a4b] p-6 sm:p-8">
             <div className="flex items-start gap-4">
-              <span className="mt-1 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#11110f] text-white"><Check className="h-4 w-4" /></span>
+              <span className="mt-1 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#292421] text-white"><Check className="h-4 w-4" /></span>
               <div>
                 <p className="text-[10px] font-extrabold uppercase tracking-[0.16em]">Payment method</p>
                 <h2 className="mt-1 font-manrope text-2xl font-bold tracking-[-0.035em]">Cash on Delivery</h2>
@@ -138,39 +138,39 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        <aside className="sticky top-[96px] overflow-hidden rounded-[28px] bg-[#11110f] text-white shadow-[0_24px_70px_rgba(17,17,15,0.2)]">
+        <aside className="sticky top-[96px] overflow-hidden rounded-[28px] bg-[#292421] text-white shadow-[0_24px_70px_rgba(17,17,15,0.2)]">
           <div className="p-6 sm:p-8">
-            <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#777]">Your order</p>
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#756c65]">Your order</p>
             <div className="mt-6 max-h-72 space-y-4 overflow-y-auto pr-1">
               {items.map((item) => (
                 <div key={`${item.id}-${item.selectedSize}-${item.selectedColor}`} className="flex gap-3">
-                  <div className="relative h-16 w-14 flex-none overflow-hidden rounded-lg bg-[#2b2b2b]">
+                  <div className="relative h-16 w-14 flex-none overflow-hidden rounded-lg bg-[#393330]">
                     <Image src={item.image} alt="" fill sizes="56px" className="object-cover" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-bold">{item.name}</p>
-                    <p className="mt-1 text-[10px] uppercase tracking-[0.08em] text-[#888]">{item.selectedSize} / {item.selectedColor} / Qty {item.quantity}</p>
-                    <p className="mt-1 text-xs font-bold text-[#b6ff39]">{formatPrice(item.price * item.quantity)}</p>
+                    <p className="mt-1 text-[10px] uppercase tracking-[0.08em] text-[#8c837c]">{item.selectedSize} / {item.selectedColor} / Qty {item.quantity}</p>
+                    <p className="mt-1 text-xs font-bold text-[#a56a4b]">{formatPrice(item.price * item.quantity)}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="mt-6 space-y-3 border-y border-white/15 py-5 text-sm text-[#bbb]">
+            <div className="mt-6 space-y-3 border-y border-white/15 py-5 text-sm text-[#b5aca5]">
               <div className="flex justify-between"><span>Subtotal</span><span>{formatPrice(subtotal)}</span></div>
-              {discount > 0 && <div className="flex justify-between text-[#b6ff39]"><span>{discountCode}</span><span>−{formatPrice(discount)}</span></div>}
-              <div className="flex justify-between"><span>Delivery</span><span className="font-bold text-[#b6ff39]">Free</span></div>
+              {discount > 0 && <div className="flex justify-between text-[#a56a4b]"><span>{discountCode}</span><span>−{formatPrice(discount)}</span></div>}
+              <div className="flex justify-between"><span>Delivery</span><span className="font-bold text-[#a56a4b]">Free</span></div>
             </div>
             <div className="flex items-end justify-between py-6">
-              <span className="text-sm text-[#bbb]">Total</span>
+              <span className="text-sm text-[#b5aca5]">Total</span>
               <span className="font-manrope text-3xl font-extrabold tracking-[-0.04em]">{formatPrice(total)}</span>
             </div>
-            {error && <p role="alert" className="mb-4 rounded-xl bg-[#ff5e48]/15 p-3 text-xs text-[#ffb5aa]">{error}</p>}
-            <button type="submit" disabled={submitting} className="flex w-full items-center justify-center gap-2 rounded-full bg-[#b6ff39] px-5 py-4 text-[11px] font-extrabold uppercase tracking-[0.08em] text-[#11110f] transition hover:-translate-y-0.5 hover:bg-white disabled:cursor-wait disabled:opacity-60">
+            {error && <p role="alert" className="mb-4 rounded-xl bg-[#7f5539]/15 p-3 text-xs text-[#ffb5aa]">{error}</p>}
+            <button type="submit" disabled={submitting} className="flex w-full items-center justify-center gap-2 rounded-full bg-[#a56a4b] px-5 py-4 text-[11px] font-extrabold uppercase tracking-[0.08em] text-[#292421] transition hover:-translate-y-0.5 hover:bg-white disabled:cursor-wait disabled:opacity-60">
               {submitting ? "Placing order…" : "Place COD order"} {!submitting && <PackageCheck className="h-4 w-4" />}
             </button>
-            <div className="mt-5 grid grid-cols-2 gap-3 text-[9px] uppercase tracking-[0.06em] text-[#888]">
-              <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[#b6ff39]" /> Private details</span>
-              <span className="flex items-center justify-end gap-1.5"><Truck className="h-4 w-4 text-[#b6ff39]" /> Free delivery</span>
+            <div className="mt-5 grid grid-cols-2 gap-3 text-[9px] uppercase tracking-[0.06em] text-[#8c837c]">
+              <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[#a56a4b]" /> Private details</span>
+              <span className="flex items-center justify-end gap-1.5"><Truck className="h-4 w-4 text-[#a56a4b]" /> Free delivery</span>
             </div>
           </div>
         </aside>

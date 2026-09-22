@@ -14,7 +14,7 @@ type User = {
 type Rewards = { points: number; referralCode: string };
 
 const inputClass =
-  "mt-2 h-12 w-full rounded-xl border border-[#11110f]/12 bg-white px-4 text-sm outline-none transition placeholder:text-[#aaa] focus:border-[#11110f] focus:ring-2 focus:ring-[#b6ff39]/50";
+  "mt-2 h-12 w-full rounded-xl border border-[#292421]/12 bg-white px-4 text-sm outline-none transition placeholder:text-[#a49b94] focus:border-[#292421] focus:ring-2 focus:ring-[#a56a4b]/50";
 
 export default function AccountPage() {
   const [mode, setMode] = useState<"login" | "signup">("login");
@@ -90,7 +90,7 @@ export default function AccountPage() {
   if (loading) {
     return (
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div className="h-[520px] animate-pulse rounded-[32px] bg-[#e4e0d8]" />
+        <div className="h-[520px] animate-pulse rounded-[32px] bg-[#d8d0c8]" />
       </section>
     );
   }
@@ -98,35 +98,35 @@ export default function AccountPage() {
   if (user) {
     return (
       <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-        <div className="overflow-hidden rounded-2xl border border-[#11110f]/10 bg-[#f8f6f0] shadow-[0_18px_50px_rgba(17,17,15,0.08)]">
+        <div className="overflow-hidden rounded-2xl border border-[#292421]/10 bg-[#f3efeb] shadow-[0_18px_50px_rgba(17,17,15,0.08)]">
           <div className="grid md:grid-cols-[0.75fr_1.25fr]">
-            <div className="bg-[#11110f] p-7 text-white sm:p-8">
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#b6ff39] text-[#11110f]">
+            <div className="bg-[#292421] p-7 text-white sm:p-8">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#a56a4b] text-[#292421]">
                 <UserRound className="h-6 w-6" />
               </span>
-              <p className="mt-8 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#777]">Member account</p>
+              <p className="mt-8 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#756c65]">Member account</p>
               <h1 className="mt-2 font-manrope text-3xl font-bold leading-tight tracking-[-0.04em]">
-                Welcome back, <em className="font-playfair font-semibold text-[#b6ff39]">{user.name.split(" ")[0]}.</em>
+                Welcome back, <em className="font-playfair font-semibold text-[#a56a4b]">{user.name.split(" ")[0]}.</em>
               </h1>
               <p className="mt-4 break-all text-sm text-[#999]">{user.email}</p>
               <button
                 type="button"
                 onClick={logout}
                 disabled={submitting}
-                className="mt-8 flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#aaa] hover:text-white disabled:opacity-50"
+                className="mt-8 flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#a49b94] hover:text-white disabled:opacity-50"
               >
                 <LogOut className="h-4 w-4" /> Sign out
               </button>
             </div>
 
             <div className="p-7 sm:p-8">
-              <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#79776f]">Your space</p>
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#6f6964]">Your space</p>
               <h2 className="mt-2 font-manrope text-2xl font-bold tracking-[-0.035em]">Everything in one place.</h2>
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-[24px] bg-[#b6ff39] p-6 sm:col-span-2">
+                <div className="rounded-[24px] bg-[#a56a4b] p-6 sm:col-span-2">
                   <div className="flex flex-wrap items-end justify-between gap-4">
                     <div>
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#11110f] text-white">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#292421] text-white">
                         <Gift className="h-5 w-5"/>
                       </span>
                       <p className="mt-5 text-[10px] font-extrabold uppercase tracking-[0.12em]">TNT Rewards</p>
@@ -146,29 +146,29 @@ export default function AccountPage() {
                     Earn 1 point per PKR 100 spent. You started with 50 points; a successful referral gives you 100 more.
                   </p>
                 </div>
-                <Link href="/wishlist" className="group rounded-[24px] border border-[#11110f]/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#b6ff39]">
+                <Link href="/wishlist" className="group rounded-[24px] border border-[#292421]/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#a56a4b]">
                     <Check className="h-5 w-5" />
                   </span>
                   <h3 className="mt-6 font-manrope text-xl font-bold">Saved pieces</h3>
-                  <p className="mt-2 text-sm text-[#79776f]">Return to everything you added to your wishlist.</p>
+                  <p className="mt-2 text-sm text-[#6f6964]">Return to everything you added to your wishlist.</p>
                   <span className="mt-5 flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.08em]">
                     View wishlist <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                   </span>
                 </Link>
-                <Link href="/products" className="group rounded-[24px] border border-[#11110f]/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e4e0d8]">
+                <Link href="/products" className="group rounded-[24px] border border-[#292421]/10 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d8d0c8]">
                     <Package className="h-5 w-5" />
                   </span>
                   <h3 className="mt-6 font-manrope text-xl font-bold">Latest collection</h3>
-                  <p className="mt-2 text-sm text-[#79776f]">Discover new pieces and continue building your selection.</p>
+                  <p className="mt-2 text-sm text-[#6f6964]">Discover new pieces and continue building your selection.</p>
                   <span className="mt-5 flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.08em]">
                     Start shopping <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                   </span>
                 </Link>
               </div>
               <CustomerOrders />
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#11110f]/10 bg-white p-5"><div><p className="font-semibold">Need help with an order?</p><p className="mt-1 text-sm text-[#79776f]">Our support team can help with delivery, exchanges, or returns.</p></div><Link href="/contact" className="rounded-full bg-[#11110f] px-5 py-3 text-[10px] font-extrabold uppercase tracking-[0.08em] text-white">Message support <ArrowRight className="ml-1 inline h-3 w-3" /></Link></div>
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#292421]/10 bg-white p-5"><div><p className="font-semibold">Need help with an order?</p><p className="mt-1 text-sm text-[#6f6964]">Our support team can help with delivery, exchanges, or returns.</p></div><Link href="/contact" className="rounded-full bg-[#292421] px-5 py-3 text-[10px] font-extrabold uppercase tracking-[0.08em] text-white">Message support <ArrowRight className="ml-1 inline h-3 w-3" /></Link></div>
             </div>
           </div>
         </div>
@@ -178,19 +178,19 @@ export default function AccountPage() {
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-20">
-      <div className="overflow-hidden rounded-[32px] border border-[#11110f]/10 bg-[#f8f6f0] shadow-[0_24px_70px_rgba(17,17,15,0.09)]">
+      <div className="overflow-hidden rounded-[32px] border border-[#292421]/10 bg-[#f3efeb] shadow-[0_24px_70px_rgba(17,17,15,0.09)]">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative hidden min-h-[610px] overflow-hidden bg-[#11110f] p-10 text-white lg:flex lg:flex-col lg:justify-between">
+          <div className="relative hidden min-h-[610px] overflow-hidden bg-[#292421] p-10 text-white lg:flex lg:flex-col lg:justify-between">
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[48px_48px]" />
             <div className="relative">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#b6ff39] text-[#11110f]">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#a56a4b] text-[#292421]">
                 <LockKeyhole className="h-5 w-5" />
               </span>
             </div>
             <div className="relative">
-              <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#777]">Thread n Trends members</p>
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#756c65]">Thread n Trends members</p>
               <h1 className="mt-3 font-manrope text-6xl font-bold leading-[0.86] tracking-[-0.06em]">
-                Your style,<br /><em className="font-playfair font-semibold text-[#b6ff39]">remembered.</em>
+                Your style,<br /><em className="font-playfair font-semibold text-[#a56a4b]">remembered.</em>
               </h1>
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-[#999]">
                 Create an account to keep your identity connected to every future Thread n Trends experience.
@@ -199,17 +199,17 @@ export default function AccountPage() {
           </div>
 
           <div className="p-6 sm:p-10 lg:p-14">
-            <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#79776f]">
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#6f6964]">
               {mode === "login" ? "Welcome back" : "Join the frequency"}
             </p>
             <h2 className="mt-2 font-manrope text-4xl font-bold tracking-[-0.05em] sm:text-5xl">
               {mode === "login" ? "Sign in." : "Create account."}
             </h2>
-            <p className="mt-3 text-sm text-[#79776f]">
+            <p className="mt-3 text-sm text-[#6f6964]">
               {mode === "login" ? "Enter your details to access your account." : "A name, email and secure password are all you need."}
             </p>
 
-            <div className="mt-7 grid grid-cols-2 rounded-full bg-[#e4e0d8] p-1">
+            <div className="mt-7 grid grid-cols-2 rounded-full bg-[#d8d0c8] p-1">
               {(["login", "signup"] as const).map((option) => (
                 <button
                   key={option}
@@ -219,7 +219,7 @@ export default function AccountPage() {
                     setError("");
                   }}
                   className={`rounded-full px-4 py-3 text-[10px] font-extrabold uppercase tracking-[0.09em] transition ${
-                    mode === option ? "bg-[#11110f] text-white shadow-lg" : "text-[#79776f]"
+                    mode === option ? "bg-[#292421] text-white shadow-lg" : "text-[#6f6964]"
                   }`}
                 >
                   {option === "login" ? "Log in" : "Sign up"}
@@ -235,7 +235,7 @@ export default function AccountPage() {
                     <input className={inputClass} name="name" autoComplete="name" minLength={2} maxLength={100} placeholder="Your full name" required />
                   </label>
                   <label className="block text-xs font-bold">
-                    Referral code <span className="font-normal text-[#79776f]">(optional)</span>
+                    Referral code <span className="font-normal text-[#6f6964]">(optional)</span>
                     <input className={inputClass} name="referralCode" maxLength={24} placeholder="TNT…" />
                   </label>
                 </>
@@ -250,19 +250,19 @@ export default function AccountPage() {
               </label>
 
               {error && (
-                <p role="alert" className="rounded-xl bg-[#ff5e48]/10 px-4 py-3 text-sm font-medium text-[#b62f20]">{error}</p>
+                <p role="alert" className="rounded-xl bg-[#7f5539]/10 px-4 py-3 text-sm font-medium text-[#b62f20]">{error}</p>
               )}
 
               <button
                 type="submit"
                 disabled={submitting}
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#b6ff39] px-6 py-4 text-[11px] font-extrabold uppercase tracking-[0.08em] transition hover:-translate-y-0.5 hover:bg-[#11110f] hover:text-white disabled:cursor-wait disabled:opacity-60"
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#a56a4b] px-6 py-4 text-[11px] font-extrabold uppercase tracking-[0.08em] transition hover:-translate-y-0.5 hover:bg-[#292421] hover:text-white disabled:cursor-wait disabled:opacity-60"
               >
                 {submitting ? "Please wait..." : mode === "login" ? "Log in" : "Create account"} {!submitting && <ArrowRight className="h-4 w-4" />}
               </button>
             </form>
 
-            <p className="mt-6 flex items-center justify-center gap-2 text-center text-[10px] text-[#79776f]">
+            <p className="mt-6 flex items-center justify-center gap-2 text-center text-[10px] text-[#6f6964]">
               <ShieldCheck className="h-4 w-4" /> Passwords are salted and securely hashed.
             </p>
           </div>

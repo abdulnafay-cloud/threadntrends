@@ -12,15 +12,15 @@
 
 @layer base {
   :root {
-    --bg: 40 30% 94%; /* #f2f0ea */
-    --ink: 60 6% 7%; /* #11110f */
-    --soft: 45 14% 83%; /* #dbd7cc */
-    --paper: 45 25% 96%; /* #f8f6f0 */
-    --accent: 82 100% 61%; /* #b6ff39 */
-    --accent2: 8 100% 64%; /* #ff5e48 */
-    --muted: 40 4% 47%; /* #79776f */
-    --line: 60 6% 6% / 0.14;
-    --radius: 24px;
+    --bg: 28 17% 91%; /* warm stone */
+    --ink: 28 12% 15%; /* espresso */
+    --soft: 27 16% 80%; /* taupe */
+    --paper: 32 21% 94%; /* bone */
+    --accent: 22 37% 47%; /* clay */
+    --accent2: 25 38% 36%; /* cacao */
+    --muted: 26 6% 43%; /* warm grey */
+    --line: 28 12% 15% / 0.14;
+    --radius: 22px;
   }
 }
 
@@ -31,12 +31,34 @@
 }
 
 body {
-  background: linear-gradient(145deg, rgba(242, 240, 234, 0.96), rgba(248, 246, 240, 0.9));
-  color: #11110f;
+  background:
+    radial-gradient(circle at 4% 0%, rgba(165, 106, 75, 0.15), transparent 29rem),
+    radial-gradient(circle at 96% 20%, rgba(73, 66, 61, 0.10), transparent 27rem),
+    linear-gradient(135deg, #f3efeb 0%, #ece7e1 48%, #e4ddd7 100%);
+  color: #292421;
   font-family: "DM Sans", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
+
+.nav-icon {
+  height: 34px;
+  width: 34px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  opacity: .82;
+  transition: transform .25s ease, background-color .25s ease, color .25s ease, opacity .25s ease;
+}
+.nav-icon:hover { transform: translateY(-2px); opacity: 1; background: #a56a4b; color: #292421; border-color: #a56a4b; }
+.eyebrow { font-size: .625rem; line-height: 1; font-weight: 800; text-transform: uppercase; letter-spacing: .2em; color: #6f6964; }
+.editorial-button { display: inline-flex; align-items: center; gap: .65rem; padding: .95rem 1.25rem; font-size: .625rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; transition: transform .25s ease, background-color .25s ease, color .25s ease; }
+.editorial-button:hover { transform: translateY(-3px); background: #a56a4b; }
+.hero-noise { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E"); }
+.writing-mode-vertical { writing-mode: vertical-rl; }
+.marquee { display: flex; width: max-content; min-width: 100%; gap: 1.25rem; white-space: nowrap; animation: marquee-slide 24s linear infinite; }
+.marquee span { color: #f3efeb; }
+@keyframes marquee-slide { from { transform: translateX(0); } to { transform: translateX(-18%); } }
 
 html {
   scroll-behavior: smooth;
@@ -51,12 +73,12 @@ html {
   }
 }
 
-@keyframes ambient-drift-lime {
+@keyframes ambient-drift-clay {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
   50% { transform: translate3d(-5vw, 7vh, 0) scale(1.08); }
 }
 
-@keyframes ambient-drift-coral {
+@keyframes ambient-drift-stone {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
   50% { transform: translate3d(7vw, -5vh, 0) scale(1.1); }
 }
@@ -67,13 +89,13 @@ html {
 }
 
 .ambient-glow-lime {
-  background: radial-gradient(circle, rgba(182, 255, 57, 0.19), rgba(182, 255, 57, 0) 68%);
-  animation: ambient-drift-lime 18s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(165, 106, 75, 0.19), rgba(165, 106, 75, 0) 68%);
+  animation: ambient-drift-clay 18s ease-in-out infinite;
 }
 
 .ambient-glow-coral {
-  background: radial-gradient(circle, rgba(255, 94, 72, 0.13), rgba(255, 94, 72, 0) 69%);
-  animation: ambient-drift-coral 22s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(65, 58, 53, 0.13), rgba(65, 58, 53, 0) 69%);
+  animation: ambient-drift-stone 22s ease-in-out infinite;
 }
 
 .ambient-grain {
@@ -82,6 +104,7 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .ambient-glow { animation: none; }
+  .marquee { animation: none; }
 }
 
 /* Custom scrollbar - warm tone */
@@ -89,34 +112,34 @@ html {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f2f0ea;
+  background: #ece7e1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #79776f;
+  background: #6f6964;
   border-radius: 4px;
 }
 
 /* Utility classes matching the concept */
 .glass-light {
-  background: rgba(242, 240, 234, 0.87);
+  background: rgba(243, 239, 235, 0.84);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(17, 17, 15, 0.14);
+  border-bottom: 1px solid rgba(41, 36, 33, 0.13);
 }
 
 .glass-card-light {
-  background: #f8f6f0;
-  border: 1px solid rgba(17, 17, 15, 0.08);
-  box-shadow: 0 24px 70px rgba(17, 17, 15, 0.14);
+  background: #f3efeb;
+  border: 1px solid rgba(41, 36, 33, 0.09);
+  box-shadow: 0 24px 70px rgba(41, 36, 33, 0.13);
 }
 
 .shadow-soft {
-  box-shadow: 0 24px 70px rgba(17, 17, 15, 0.14);
+  box-shadow: 0 24px 70px rgba(41, 36, 33, 0.13);
 }
 
 /* Gradient text for brand */
 .gradient-text-brand {
-  background: linear-gradient(135deg, #11110f, #b6ff39);
+  background: linear-gradient(135deg, #292421, #a56a4b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -124,15 +147,20 @@ html {
 
 /* Selection color */
 ::selection {
-  background: #11110f;
-  color: white;
+  background: #a56a4b;
+  color: #f3efeb;
+}
+
+:focus-visible {
+  outline: 2px solid #a56a4b;
+  outline-offset: 3px;
 }
 
 @media print {
   nav, footer, body > header, .print-hide { display: none !important; }
-  body { background: #fff !important; color: #111 !important; }
+  body { background: #fff !important; color: #292421 !important; }
   main { padding-top: 0 !important; }
   .invoice-card { border: 0 !important; box-shadow: none !important; border-radius: 0 !important; }
-  .invoice-card::before { content: "THREAD N TRENDS  /  ORDER INVOICE"; display: block; padding-bottom: 24px; border-bottom: 2px solid #111; margin-bottom: 28px; font-size: 18px; font-weight: 800; letter-spacing: 0.18em; }
+  .invoice-card::before { content: "THREAD N TRENDS  /  ORDER INVOICE"; display: block; padding-bottom: 24px; border-bottom: 2px solid #292421; margin-bottom: 28px; font-size: 18px; font-weight: 800; letter-spacing: 0.18em; }
   main a, main button { display: none !important; }
 }

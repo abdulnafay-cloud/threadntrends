@@ -1,21 +1,9 @@
 "use client";
+
 import { motion } from "framer-motion";
 
-const benefits = [
-  ["◎", "Easy Exchange", "7-day exchange on eligible unworn products."],
-  ["⌁", "Fast Dispatch", "Orders typically dispatch in 24–48 business hours."],
-  ["◇", "Quality Checked", "Each piece inspected before packing."],
-  ["♲", "Lower Waste", "Limited drops and smaller production runs."],
-];
+const benefits = [["01", "Easy exchange", "Seven days to decide, as long as it is unworn."], ["02", "Quick dispatch", "Thoughtfully packed and usually on its way in 24–48 hours."], ["03", "Checked by hand", "Every piece is inspected before it leaves our studio."], ["04", "Smaller runs", "Better considered production with less unnecessary waste."]];
 
 export default function Benefits() {
-  return (
-    <section className="py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 border-t border-b border-[#11110f]/14">
-          {benefits.map(([icon, title, description], index) => <motion.div key={title} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.7 }} transition={{ duration: 0.55, delay: index * 0.09 }} className="p-7 md:p-9 border-r border-[#11110f]/14 last:border-0"><motion.span whileHover={{ rotate: 18, scale: 1.2 }} className="inline-block text-3xl">{icon}</motion.span><div className="font-bold text-base mt-4 mb-2">{title}</div><span className="text-sm text-[#79776f] leading-relaxed">{description}</span></motion.div>)}
-        </div>
-      </div>
-    </section>
-  );
+  return <section className="bg-[#ece7e1] px-4 py-10 sm:px-7 lg:px-10"><div className="mx-auto max-w-[1440px]"><div className="grid border-y border-[#292421]/15 md:grid-cols-4">{benefits.map(([number, title, text], index) => <motion.article key={title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .5 }} transition={{ duration: .5, delay: index * .08 }} className="border-b border-[#292421]/15 p-6 last:border-0 md:border-b-0 md:border-r md:last:border-r-0 lg:p-8"><span className="font-playfair text-3xl italic text-[#a56a4b]">{number}</span><h3 className="mt-7 font-manrope text-base font-bold tracking-[-.03em]">{title}</h3><p className="mt-2 text-sm leading-6 text-[#6f6964]">{text}</p></motion.article>)}</div></div></section>;
 }
