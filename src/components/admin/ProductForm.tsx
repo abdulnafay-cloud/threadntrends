@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { productTypesByCategory, shopCategories } from '@/lib/product-categories';
 
 interface Variant {
   size: string;
@@ -15,10 +16,12 @@ interface ProductFormProps {
 
 export default function ProductForm({ product }: ProductFormProps) {
   const router = useRouter();
+  const initialCategory = shopCategories.find((item) => item.toLowerCase() === String(product?.category || '').toLowerCase()) || 'Men';
   const [variants, setVariants] = useState<Variant[]>(product?.variants || [{ size: '', color: '', stock: 0, sku: '' }]);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
+  const [category, setCategory] = useState<keyof typeof productTypesByCategory>(initialCategory);
   function slugify(value: string) { return value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
 
 
@@ -95,11 +98,16 @@ export default function ProductForm({ product }: ProductFormProps) {
         </div>
         <div>
           <label className="block text-sm font-medium">Category</label>
-          <select name="category" defaultValue={product?.category || 'Men'} required className="w-full border rounded px-3 py-2"><option>Men</option><option>Women</option><option>Accessories</option></select>
+          <select name="category" value={category} onChange={(event) => setCategory(event.target.value as keyof typeof productTypesByCategory)} required className="w-full border rounded px-3 py-2">
+            {shopCategories.map((item) => <option key={item}>{item}</option>)}
+          </select>
         </div>
         <div>
-          <label className="block text-sm font-medium">Sub-category</label>
-          <input name="sub" defaultValue={product?.sub} className="w-full border rounded px-3 py-2" />
+          <label className="block text-sm font-medium">Product type</label>
+          <select name="sub" key={category} defaultValue={initialCategory === category ? product?.sub || '' : ''} required className="w-full border rounded px-3 py-2">
+            <option value="" disabled>Select a product type</option>
+            {productTypesByCategory[category].map((item) => <option key={item}>{item}</option>)}
+          </select>
         </div>
         <div className="col-span-2">
           <label className="block text-sm font-medium">Description</label>
