@@ -9,37 +9,27 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function Hero() {
   const reduced = useReducedMotion();
-  return <section className="relative overflow-hidden bg-[#292421] pt-[74px] text-[#f3efeb]">
-    <div className="absolute inset-0 hero-noise opacity-40" />
-    <div className="relative mx-auto grid min-h-[min(850px,100svh)] max-w-[1600px] grid-cols-1 lg:grid-cols-[1.07fr_0.93fr]">
-      <div className="relative flex flex-col justify-between px-5 pb-8 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pb-10 xl:px-20">
-        <motion.div initial={reduced ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease }} className="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.2em] text-[#d8d0c8]">
-          <span className="h-px w-8 bg-[#a56a4b]" /> Edition 01 · Karachi
-        </motion.div>
-        <div className="relative z-10 py-14 lg:py-0">
-          <motion.p initial={reduced ? false : { opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.65, delay: 0.12, ease }} className="mb-5 max-w-xs text-sm leading-6 text-[#d8d0c8]">Clothes for a life in motion. Quiet confidence, cut with purpose.</motion.p>
-          <motion.h1 initial={reduced ? false : { opacity: 0, y: 44 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.16, ease }} className="font-playfair text-[clamp(76px,11vw,176px)] leading-[0.69] tracking-[-0.075em]">
-            Made<br /><i className="ml-[0.48em] text-[#c98a66]">to be</i><br /><span className="font-manrope text-[0.65em] font-semibold not-italic uppercase tracking-[-0.09em]">worn.</span>
-          </motion.h1>
-          <motion.div initial={reduced ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5, ease }} className="mt-9 flex flex-wrap items-center gap-5">
-            <Link href="/products" className="editorial-button bg-[#f3efeb] text-[#292421]">Shop the collection <ArrowUpRight size={16} /></Link>
-            <Link href="/lookbook" className="border-b border-[#f3efeb]/45 pb-1 text-[10px] font-bold uppercase tracking-[0.16em] transition hover:border-[#a56a4b] hover:text-[#c98a66]">View the journal</Link>
-          </motion.div>
-        </div>
-        <div className="flex items-end justify-between border-t border-white/15 pt-5">
-          <span className="max-w-36 text-[9px] font-bold uppercase leading-5 tracking-[0.16em] text-[#d8d0c8]">Seasonless selections for every part of the day</span>
-          <a href="#collection" aria-label="Explore collection" className="grid h-11 w-11 place-items-center rounded-full border border-white/25 transition hover:bg-[#a56a4b] hover:text-[#292421]"><ArrowDown size={17} /></a>
-        </div>
-      </div>
-      <motion.div initial={reduced ? false : { opacity: 0, clipPath: "inset(0 0 100% 0)" }} animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }} transition={{ duration: 1.2, delay: 0.18, ease }} className="relative min-h-[520px] overflow-hidden lg:min-h-full">
-        <Image src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1500&q=90" alt="Thread n Trends editorial collection" fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover object-[center_36%] saturate-[0.55] contrast-[1.05]" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(41,36,33,.38),transparent_36%),linear-gradient(0deg,rgba(41,36,33,.55),transparent_40%)]" />
-        <motion.div animate={reduced ? undefined : { y: [0, -9, 0] }} transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-6 left-6 max-w-[208px] border border-white/25 bg-[#292421]/80 p-4 backdrop-blur-md sm:bottom-10 sm:left-10">
-          <p className="text-[8px] font-bold uppercase tracking-[0.19em] text-[#c98a66]">The everyday edit</p>
-          <p className="mt-2 font-playfair text-2xl italic leading-none">Uncomplicated, but never ordinary.</p>
-        </motion.div>
-        <div className="absolute right-5 top-6 writing-mode-vertical text-[8px] font-bold uppercase tracking-[0.26em] text-white/70 sm:right-8 sm:top-10">Thread n Trends · 2026</div>
+  return <section className="relative isolate min-h-[min(860px,100svh)] overflow-hidden bg-[#292421] px-4 pb-8 pt-[74px] text-[#f3efeb] sm:px-7 lg:px-10">
+    <div className="hero-noise absolute inset-0 opacity-40" />
+    <div className="absolute left-1/2 top-1/2 h-[630px] w-[630px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#a56a4b]/20 blur-[130px]" />
+    <div className="relative mx-auto grid min-h-[calc(min(860px,100svh)-106px)] max-w-[1440px] grid-cols-2 items-center gap-3 py-9 sm:gap-6 lg:grid-cols-[.78fr_1.15fr_.78fr] lg:gap-10">
+      <motion.figure initial={reduced ? false : { opacity: 0, x: -72, rotate: -7 }} animate={{ opacity: 1, x: 0, rotate: -4 }} transition={{ duration: 1.05, ease }} className="relative z-10 col-start-1 row-start-1 mt-20 overflow-hidden border border-white/20 bg-[#393330] shadow-[0_28px_80px_rgba(0,0,0,.28)] lg:mt-0">
+        <motion.div animate={reduced ? undefined : { y: [0, -16, 0], scale: [1, 1.035, 1] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} className="relative aspect-[.69]"><Image src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=900&q=90" alt="Thread n Trends menswear editorial" fill priority sizes="(max-width: 1024px) 43vw, 26vw" className="object-cover saturate-[.55]" /></motion.div>
+        <figcaption className="absolute bottom-3 left-3 border border-white/25 bg-[#292421]/80 px-2.5 py-2 text-[7px] font-bold uppercase tracking-[.16em] backdrop-blur-sm sm:bottom-5 sm:left-5">Look 01 / Form</figcaption>
+      </motion.figure>
+
+      <motion.div initial={reduced ? false : { opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .9, delay: .22, ease }} className="relative z-20 col-span-2 col-start-1 row-start-1 mx-auto flex max-w-[760px] flex-col items-center px-1 text-center lg:col-span-1 lg:col-start-2">
+        <motion.p initial={reduced ? false : { opacity: 0, scale: .86 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .6, delay: .38, ease }} className="mb-5 flex items-center gap-3 text-[9px] font-bold uppercase tracking-[.2em] text-[#d8d0c8]"><span className="h-px w-7 bg-[#c98a66]" /> Edition 01 · 2026 <span className="h-px w-7 bg-[#c98a66]" /></motion.p>
+        <motion.h1 initial={reduced ? false : { opacity: 0, y: 40, filter: "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: 1.05, delay: .15, ease }} className="font-playfair text-[clamp(61px,10vw,154px)] leading-[.7] tracking-[-.08em]">Wear the<br /><i className="text-[#d59b79]">moment.</i></motion.h1>
+        <motion.p initial={reduced ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .72, delay: .58, ease }} className="mt-7 max-w-[310px] text-sm leading-6 text-[#d8d0c8]">Intentional pieces for the hours that happen between plans.</motion.p>
+        <motion.div initial={reduced ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .72, delay: .69, ease }} className="mt-7 flex flex-wrap justify-center gap-3"><Link href="/products" className="editorial-button bg-[#f3efeb] text-[#292421]">Shop collection <ArrowUpRight size={16} /></Link><Link href="/lookbook" className="editorial-button border border-white/30 text-[#f3efeb] hover:border-[#a56a4b] hover:bg-[#a56a4b] hover:text-[#292421]">View lookbook</Link></motion.div>
       </motion.div>
+
+      <motion.figure initial={reduced ? false : { opacity: 0, x: 72, rotate: 7 }} animate={{ opacity: 1, x: 0, rotate: 4 }} transition={{ duration: 1.05, delay: .1, ease }} className="relative z-10 col-start-2 row-start-1 self-end overflow-hidden border border-white/20 bg-[#393330] shadow-[0_28px_80px_rgba(0,0,0,.28)] lg:col-start-3 lg:self-center">
+        <motion.div animate={reduced ? undefined : { y: [-12, 5, -12], scale: [1.035, 1, 1.035] }} transition={{ duration: 8.8, repeat: Infinity, ease: "easeInOut" }} className="relative aspect-[.69]"><Image src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=90" alt="Thread n Trends womenswear editorial" fill priority sizes="(max-width: 1024px) 43vw, 26vw" className="object-cover saturate-[.55]" /></motion.div>
+        <figcaption className="absolute bottom-3 right-3 border border-white/25 bg-[#292421]/80 px-2.5 py-2 text-[7px] font-bold uppercase tracking-[.16em] backdrop-blur-sm sm:bottom-5 sm:right-5">Look 02 / Ease</figcaption>
+      </motion.figure>
     </div>
+    <motion.a href="#collection" initial={reduced ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.05 }} className="absolute bottom-5 left-1/2 z-20 grid h-10 w-10 -translate-x-1/2 place-items-center rounded-full border border-white/30 transition hover:bg-[#a56a4b] hover:text-[#292421]" aria-label="Explore collection"><ArrowDown size={17} /></motion.a>
   </section>;
 }
