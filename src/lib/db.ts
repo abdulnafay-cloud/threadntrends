@@ -15,7 +15,7 @@ const globalForDatabase = globalThis as unknown as {
 };
 
 // Increment SCHEMA_VERSION to 4
-const SCHEMA_VERSION = 5;
+const SCHEMA_VERSION = 6;
 
 export const database =
   globalForDatabase.threadNTrendsPool ??
@@ -177,6 +177,8 @@ export function ensureAuthSchema() {
           UNIQUE (product_id, size, color)
         )
       `);
+      // Blank SKU values from older forms conflict with the unique SKU constraint.
+      await database.query(`UPDATE tnt_product_variants SET sku = NULL WHERE BTRIM(COALESCE(sku, '')) = ''`);
 
       // Discount codes
       await database.query(`

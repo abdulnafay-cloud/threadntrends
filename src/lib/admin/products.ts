@@ -22,8 +22,29 @@ export interface ProductInput {
   variants: ProductVariantInput[];
 }
 
+function optionalText(value: string | undefined) {
+  const text = value?.trim();
+  return text ? text : null;
+}
+
+function normaliseVariants(variants: ProductVariantInput[]) {
+  if (!Array.isArray(variants) || variants.length === 0) {
+    throw new Error("Add at least one size, colour, and stock variant.");
+  }
+  return variants.map((variant) => {
+    const size = variant.size?.trim();
+    const color = variant.color?.trim();
+    const stock = Number(variant.stock);
+    if (!size || !color || !Number.isInteger(stock) || stock < 0) {
+      throw new Error("Each variant needs a size, colour, and a valid stock quantity.");
+    }
+    return { size, color, stock, sku: optionalText(variant.sku) };
+  });
+}
+
 export async function createProduct(data: ProductInput): Promise<number> {
   await ensureAuthSchema();
+  const variants = normaliseVariants(data.variants);
   const client = await database.connect();
   try {
     await client.query('BEGIN');
@@ -33,11 +54,11 @@ export async function createProduct(data: ProductInput): Promise<number> {
       [data.name, data.slug, data.price, data.oldPrice ?? null, data.category, data.sub ?? null, data.description, data.image, data.image2 ?? null, data.badge ?? null]
     );
     const productId = result.rows[0].id;
-    for (const variant of data.variants) {
+    for (const variant of variants) {
       await client.query(
         `INSERT INTO tnt_product_variants (product_id, size, color, stock, sku)
          VALUES ($1, $2, $3, $4, $5)`,
-        [productId, variant.size, variant.color, variant.stock, variant.sku ?? null]
+        [productId, variant.size, variant.color, variant.stock, variant.sku]
       );
     }
     await client.query('COMMIT');
@@ -87,12 +108,13 @@ export async function updateProduct(id: number, data: Partial<ProductInput>) {
     );
     // If variants provided, replace them
     if (data.variants) {
+      const variants = normaliseVariants(data.variants);
       await client.query('DELETE FROM tnt_product_variants WHERE product_id = $1', [id]);
-      for (const variant of data.variants) {
+      for (const variant of variants) {
         await client.query(
           `INSERT INTO tnt_product_variants (product_id, size, color, stock, sku)
            VALUES ($1, $2, $3, $4, $5)`,
-          [id, variant.size, variant.color, variant.stock, variant.sku ?? null]
+          [id, variant.size, variant.color, variant.stock, variant.sku]
         );
       }
     }

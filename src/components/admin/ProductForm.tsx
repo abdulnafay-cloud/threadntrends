@@ -18,12 +18,14 @@ export default function ProductForm({ product }: ProductFormProps) {
   const [variants, setVariants] = useState<Variant[]>(product?.variants || [{ size: '', color: '', stock: 0, sku: '' }]);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState('');
   function slugify(value: string) { return value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
 
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
+    setError('');
     const formData = new FormData(e.currentTarget);
     let image = String(formData.get('image') || '');
     const imageFile = formData.get('imageFile');
@@ -52,15 +54,21 @@ export default function ProductForm({ product }: ProductFormProps) {
 
     const url = product ? `/api/admin/products/${product.id}` : '/api/admin/products';
     const method = product ? 'PUT' : 'POST';
-    const res = await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (res.ok) {
-      router.push('/admin/products');
-    } else {
-      alert('Failed to save product');
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json().catch(() => ({}));
+      if (res.ok) {
+        router.push('/admin/products');
+        return;
+      }
+      setError(result.error || 'Could not save this product. Please try again.');
+    } catch {
+      setError('Could not reach the server. Check your connection and try again.');
+    } finally {
       setLoading(false);
     }
   }
@@ -113,12 +121,14 @@ export default function ProductForm({ product }: ProductFormProps) {
         </div>
       </div>
 
+      {error && <p role="alert" className="rounded border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
       <div>
         <h3 className="text-lg font-semibold mb-2">Variants (Size, Color, Stock)</h3>
         {variants.map((v, idx) => (
           <div key={idx} className="grid grid-cols-4 gap-2 mb-2">
             <input
               placeholder="Size"
+              required
               value={v.size}
               onChange={(e) => {
                 const newVariants = [...variants];
@@ -129,6 +139,7 @@ export default function ProductForm({ product }: ProductFormProps) {
             />
             <input
               placeholder="Color"
+              required
               value={v.color}
               onChange={(e) => {
                 const newVariants = [...variants];
@@ -140,6 +151,8 @@ export default function ProductForm({ product }: ProductFormProps) {
             <input
               placeholder="Stock"
               type="number"
+              min="0"
+              required
               value={v.stock}
               onChange={(e) => {
                 const newVariants = [...variants];

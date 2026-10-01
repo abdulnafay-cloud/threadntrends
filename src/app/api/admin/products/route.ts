@@ -21,6 +21,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ id }, { status: 201 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Failed to create product' }, { status: 500 });
+    const databaseError = error as { code?: string; constraint?: string; message?: string };
+    if (databaseError.code === '23505') {
+      const message = databaseError.constraint?.includes('slug')
+        ? 'That product URL name already exists. Use a different slug.'
+        : 'That SKU is already in use. Leave SKU blank or enter a unique one.';
+      return NextResponse.json({ error: message }, { status: 409 });
+    }
+    if (databaseError.message?.startsWith('Add at least') || databaseError.message?.startsWith('Each variant')) {
+      return NextResponse.json({ error: databaseError.message }, { status: 400 });
+    }
+    return NextResponse.json({ error: 'Could not create the product. Please try again.' }, { status: 500 });
   }
 }
